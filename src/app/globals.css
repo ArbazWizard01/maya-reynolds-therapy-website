@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Theme: "Santa Monica Calm"
+   Every colour is pulled from Dr. Reynolds' own office photos:
+   linen curtains, slate-grey sofas, exposed red brick, the olive tree.
+   Change a value here and it updates across the whole site.
+   ------------------------------------------------------------------ */
+:root {
+  --linen: #f6f1ea;      /* page background – linen curtains, warm walls */
+  --mist: #fcfaf7;       /* light section background (template's white) */
+  --sand: #eae1d4;       /* warm band – oak floor / jute rug */
+  --ink: #22313b;        /* primary – slate sofas, Pacific at dusk (11.9:1 on linen) */
+  --slate: #5b6770;      /* muted text (5.2:1 on linen) */
+  --clay: #a65a3e;       /* accent – exposed brick (4.5:1 on linen, white text 5.1:1) */
+  --clay-deep: #8a4831;  /* accent hover */
+  --sage: #7d8b6f;       /* secondary – olive tree (decorative only) */
+  --sage-deep: #5e6b52;  /* secondary text (5.0:1 on linen) */
+  --line: #ddd3c5;       /* hairlines */
+}
+
+@theme inline {
+  --color-linen: var(--linen);
+  --color-mist: var(--mist);
+  --color-sand: var(--sand);
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-line: var(--line);
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-mulish), "Mulish", system-ui, sans-serif;
+  --font-script: var(--font-ephesis), "Ephesis", cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--linen);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--clay);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+}
+
+/* ---------- Layout helpers (match the template's grid) ---------- */
+@utility gutter {
+  /* 6vw on phones (≈23px @375), 5vw on desktop (72px @1440) */
+  padding-inline: 6vw;
+  @media (width >= 64rem) {
+    padding-inline: 5vw;
+  }
+}
+
+@utility indent {
+  /* the template's main text column starts at ~8.8vw (126px @1440) */
+  padding-inline-start: 6vw;
+  @media (width >= 64rem) {
+    padding-inline-start: 8.8vw;
+  }
+}
+
+/* ---------- Typography scale ---------- */
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    line-height: 1.8;
+    text-transform: uppercase;
+  }
+
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .display-1 {
+    font-size: clamp(2.6rem, 4.4vw, 4.1rem);
+    line-height: 1.18;
+  }
+  .display-2 {
+    font-size: clamp(2.2rem, 3.5vw, 3.3rem);
+    line-height: 1.22;
+  }
+  .display-3 {
+    font-size: clamp(1.9rem, 2.9vw, 2.7rem);
+    line-height: 1.25;
+  }
+  .display-4 {
+    font-size: clamp(1.5rem, 2vw, 1.85rem);
+    line-height: 1.3;
+  }
+
+  .body-copy {
+    font-size: 1.0625rem; /* 17px */
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* Hand-written accent word, e.g. "exhale" in the hero */
+  .script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    font-size: 1.32em;
+    letter-spacing: 0;
+    line-height: 0.5;
+    color: var(--clay);
+    padding-inline: 0.04em;
+  }
+
+  /* Underlined text button used throughout the template */
+  .btn-link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-block: 0.5rem 0.35rem;
+    border-bottom: 1px solid currentColor;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-link:hover {
+    color: var(--clay);
+  }
+
+  /* Oval outline button (navbar "Contact") */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.95rem 1.3rem;
+    border: 1px solid currentColor;
+    border-radius: 100%;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+  .btn-pill:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--linen);
+  }
+
+  /* Solid button for primary booking actions */
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 1.9rem;
+    background: var(--clay);
+    color: #fff;
+    border-radius: 999px;
+    transition: background-color 0.25s ease;
+  }
+  .btn-solid:hover {
+    background: var(--clay-deep);
+  }
+}
